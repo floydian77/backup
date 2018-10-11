@@ -13,11 +13,24 @@ mkdir -p $DESTINATION/daily/$STAMP
 tar -czvf $DESTINATION/daily/$STAMP/content.tar.gz -C  $CONTENT .
 touch $DESTINATION/daily/$STAMP/dump.sql # TODO dump database!
 
+# Daily cleanup
+LAST_WEEK=`date --date="1 week ago" +%Y-%m-%d`
+if [ -d $DESTINATION/daily/$LAST_WEEK* ]
+  then
+    rm -rf $DESTINATION/daily/$LAST_WEEK*
+fi
+
 # Weekly backup
 if [ `date +%u` == $DAY_OF_WEEK ]
 then
   mkdir -p $DESTINATION/weekly/$STAMP
   ln $DESTINATION/daily/$STAMP/* $DESTINATION/weekly/$STAMP
+
+  LAST_MONTH=`date --date="1 month ago" +%Y-%m-%d`
+  if [ -d $DESTINATION/weekly/$LAST_MONTH* ]
+    then
+      rm -rf $DESTINATION/weekly/$LAST_MONTH*
+  fi
 fi
 
 # Monthly backup
