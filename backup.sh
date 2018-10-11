@@ -16,7 +16,7 @@ export $(egrep -v '^#' $SCRIPTPATH/.env | xargs)
 
 function backup () {
   /bin/mkdir -p $DESTINATION/$1/$STAMP
-  /bin/tar -czvf $DESTINATION/$1/$STAMP/content.tar.gz -C  $CONTENT .
+  /bin/tar --exclude='./.git' --exclude='./vendor' --exclude='./node_modules'  -czvf $DESTINATION/$1/$STAMP/content.tar.gz -C  $CONTENT .
   /usr/bin/mysqldump --defaults-file=$SCRIPTPATH/.my.cnf $DATABASE > $DESTINATION/$1/$STAMP/dump.sql
 }
 
