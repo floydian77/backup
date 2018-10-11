@@ -11,7 +11,7 @@ STAMP=`date +%Y-%m-%d_%H.%M.%S`
 # Daily backup
 mkdir -p $DESTINATION/daily/$STAMP
 tar -czvf $DESTINATION/daily/$STAMP/content.tar.gz -C  $CONTENT .
-touch $DESTINATION/daily/$STAMP/dump.sql # TODO dump database!
+mysqldump --defaults-file=$SCRIPTPATH/.my.cnf $DATABASE > $DESTINATION/daily/$STAMP/dump.sql
 
 # Daily cleanup
 LAST_WEEK=`date --date="1 week ago" +%Y-%m-%d`
