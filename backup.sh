@@ -50,8 +50,8 @@ then
   /bin/mkdir -p $DESTINATION/weekly/$STAMP
   /bin/ln $DESTINATION/daily/$STAMP/* $DESTINATION/weekly/$STAMP
 
-  LAST_MONTH=`/bin/date --date="1 month ago" +%Y-%m-%d`
-  clean "weekly" "$LAST_MONTH"
+  FOUR_WEEKS_AGO=`/bin/date --date="4 weeks ago" +%Y-%m-%d`
+  clean "weekly" "$FOUR_WEEKS_AGO"
 fi
 
 # Monthly backup
