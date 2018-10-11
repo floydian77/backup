@@ -2,7 +2,7 @@
 # Backup script.
 
 # Read options
-while getopts r option
+while getopts nr option
 do
   case "${option}"
     in
